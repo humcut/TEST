@@ -1,88 +1,72 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEB問診票</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
-</head>
-<body>
+import Head from "next/head";
+import packageJson from "../package.json";
 
-    <form class="w-75 mx-auto">
-        <p class="mt-3">氏名(全角ひらがな)</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="name" placeholder="" required>
+export default function Home(props) {
+  /** You can access to liff and liffError object through the props.
+   *  const { liff, liffError } = props;
+   *  console.log(liff.getVersion());
+   *
+   *  Learn more about LIFF API documentation (https://developers.line.biz/en/reference/liff)
+   **/
+  return (
+    <div>
+      <Head>
+        <title>LIFF Starter</title>
+      </Head>
+      <div className="home">
+        <h1 className="home__title">
+          Welcome to <br />
+          <a
+            className="home__title__link"
+            href="https://developers.line.biz/en/docs/liff/overview/"
+          >
+            Mahalo Living!
+          </a>
+        </h1>
+        <div className="home__badges">
+          <span className="home__badges__badge badge--primary">
+            LIFF Starter
+          </span>
+          <span className="home__badges__badge badge--secondary">nextjs</span>
+          <span className="home__badges__badge badge--primary">
+            {packageJson.version}
+          </span>
+          <a
+            href="https://github.com/line/line-liff-v2-starter"
+            target="_blank"
+            rel="noreferrer"
+            className="home__badges__badge badge--secondary"
+          >
+            GitHub
+          </a>
         </div>
-        <p class="mt-3">診察券番号(半角数字 不明の場合は"0")</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="bangou" required>
+        <div className="home__buttons">
+          <a
+            href="https://developers.line.biz/en/docs/liff/developing-liff-apps/"
+            target="_blank"
+            rel="noreferrer"
+            className="home__buttons__button button--primary"
+          >
+            LIFF Documentation
+          </a>
+          <a
+            href="https://liff-playground.netlify.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="home__buttons__button button--tertiary"
+          >
+            LIFF Playground
+          </a>
+          <a
+            href="https://developers.line.biz/console/"
+            target="_blank"
+            rel="noreferrer"
+            className="home__buttons__button button--secondary"
+          >
+            LINE Developers Console
+          </a>
         </div>
-        <p class="mt-3">一番お困りのことは?</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="shushoujou" required>
-        </div>
-        <p class="mt-3">いつからどのような様子ですか?</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="keika" required>
-        </div>
-        <p class="mt-3">37.5度以上の発熱の有無("はい" か "いいえ")</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="hatunetu" required>
-        </div>
-        <input type="submit" class="mt-4 btn btn-primary" value="送信">
-    </form>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script>
-
-        $(document).ready(function () {
-            const liffId = "**********-********";
-            initializeLiff(liffId);
-        })
-
-        function initializeLiff(liffId) {
-            liff.init({
-                liffId: liffId
-            }).then(() => {
-                initializeApp();
-            }).catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-            });
-        }
-
-        function sendText(text) {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': text
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert('Failed to send message ' + error);
-            });
-        }
-
-        const params = (new URL(document.location)).searchParams;
-        const key = params.get('key');
-
-        $(function () {
-            $('form').submit(function () {
-                const name    = $('input[name="name"]').val();
-                const bangou = $('input[name="bangou"]').val();
-                const shushoujou  = $('input[name="shushoujou"]').val();
-                const keika  = $('input[name="keika"]').val();
-                const hatunetu = $('input[name="hatunetu"]').val();
-                const msg = `${name}\n${bangou}\n${shushoujou}\n${keika}\n${hatunetu}`;
-                sendText(msg);
-                return false;
-            });
-        });
-
-    </script>
-
-</body>
-</html>
+      </div>
+    </div>
+  );
+}
