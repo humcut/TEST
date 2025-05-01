@@ -28,6 +28,15 @@
            GitHub
          </a>
        </div>
+      <div className="home">
+         {message && <p>{message}</p>}
+         {error && (
+           <p>
+             <code>{error}</code>
+           </p>
+         )}
+         {name && <p>こんにちは、{name}さん</p>}
+       </div>
        <div class="home__buttons">
          <a
            href="https://developers.line.biz/en/docs/liff/developing-liff-apps/"
