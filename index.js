@@ -1,7 +1,7 @@
 import './index.css';
 import liff from '@line/liff'
 
-const MY_LIFF_ID = 'YOUR_LIFF_ID'; // 例: '1655951099-AbCdEfG'
+const MY_LIFF_ID = '2007298177-JYelpW3d'; // 例: '1655951099-AbCdEfG'
 
 // メッセージを表示するHTML要素を更新する関数
 function updateMessageDisplay(text) {
