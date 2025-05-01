@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded - Starting LIFF initialization');
 
     liff.init({
-        liffId: MY_LIFF_ID
+        liffId: MY_LIFF_ID,
+        withLoginOnExternalBrowser: true,
     })
     .then(() => {
         // 成功時の処理
